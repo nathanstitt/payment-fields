@@ -4,23 +4,38 @@
         <title>React Braintree Hosted Fields Demo</title>
         <meta charset="utf-8">
         <style>
-          .braintree-hosted-field {
-            height: 40px;
-            border: 1px solid black;
-            padding: 0 1rem;
+          .hosted-card-field {
+              height: 40px;
+              border: 1px solid black;
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              padding: 0 1rem;
           }
-          .braintree-hosted-field.focused {
-            border-color: blue;
+          .hosted-card-field.focused {
+              border-color: blue;
           }
           .footer {
           display:flex;
-            justify-content: space-around;
-            padding: 2rem;
+              justify-content: space-around;
+              padding: 2rem;
           }
           .footer button {
-            padding: 1rem;
-            background-color: lightGrey;
-            font-size: 1.2rem;
+              padding: 1rem;
+              background-color: lightGrey;
+              font-size: 1.2rem;
+          }
+          .type-selection {
+              font-size: 1.2rem;
+              display: flex;
+              justify-content: space-between;
+              align-content: center;
+              width: 300px;
+              float: right;
+              padding-right: 20px;
+          }
+          .authorization {
+              input { width: 250px; }
           }
         </style>
     </head>

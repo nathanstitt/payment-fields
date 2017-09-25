@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Api from './api';
 
-export default class Braintree extends React.Component {
+export default class CreditCardFieldsWrapper extends React.Component {
 
     static propTypes = {
         children: PropTypes.node.isRequired,
@@ -20,14 +19,13 @@ export default class Braintree extends React.Component {
         tagName: 'div',
     }
 
-    static childContextTypes = {
-        braintreeApi: PropTypes.instanceOf(Api),
-    }
 
     constructor(props) {
         super(props);
+        const Api = TYPES[props.type];
         this.api = new Api(props);
     }
+
 
     componentDidMount() {
         this.api.setAuthorization(this.props.authorization);

@@ -1,41 +1,41 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
-import Api from './api';
 
-export default class BraintreeHostedField extends React.Component {
+export default class HostedField extends React.Component {
 
     static propTypes = {
         type: PropTypes.oneOf([
-            'number', 'expirationDate', 'expirationMonth', 'expirationYear', 'cvv', 'postalCode',
+            'cardNumber', 'expirationDate', 'cvv', 'postalCode',
         ]).isRequired,
         placeholder: PropTypes.string,
         className: PropTypes.string,
-        onCardTypeChange: PropTypes.func,
-        onValidityChange: PropTypes.func,
-        onNotEmpty: PropTypes.func,
+
         onFocus: PropTypes.func,
-        onEmpty: PropTypes.func,
         onBlur: PropTypes.func,
     }
 
+    static defaultProps = {
+        placeholder: '',
+    }
+
     static contextTypes = {
-        braintreeApi: PropTypes.instanceOf(Api),
+        hostedFieldsApi: PropTypes.object,
     }
 
     focus() {
-        this.context.braintreeApi.focusField(this.props.type);
+        this.context.hostedFieldsApi.focusField(this.props.type);
     }
 
     clear() {
-        this.context.braintreeApi.clearField(this.props.type);
+        this.context.hostedFieldsApi.clearField(this.props.type);
     }
 
     componentWillMount() {
-        this.fieldId = this.context.braintreeApi.checkInField(this.props);
+        this.fieldId = this.context.hostedFieldsApi.checkInField(this.props);
     }
 
     get className() {
-        const list = ['braintree-hosted-field'];
+        const list = ['hosted-card-field'];
         if (this.props.className) { list.push(this.props.className); }
         return list.join(' ');
     }
@@ -43,4 +43,5 @@ export default class BraintreeHostedField extends React.Component {
     render() {
         return <div id={this.fieldId} className={this.className} />;
     }
+
 }
