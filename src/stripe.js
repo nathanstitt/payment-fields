@@ -94,7 +94,7 @@ export default class StripeApi extends Api {
         return !!global.Stripe;
     }
 
-    onFieldValidity(field) {
+    onFieldValidity() {
         for (const type in this.fields) { // eslint-disable-line
             if (!this.fields[type].isValid) {
                 super.onFieldValidity({ isValid: false });
