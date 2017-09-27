@@ -5,7 +5,7 @@
   "main": "dist/build.full.js",
   "module": "dist/build.module.js",
   "jsnext:main": "dist/build.module.js",
-  "repository": "https://github.com/nathanstitt/react-braintree-fields.git",
+  "repository": "https://github.com/nathanstitt/payment-fields.git",
   "author": "Nathan Stitt",
   "license": "MIT",
   "peerDependencies": {
@@ -20,7 +20,12 @@
   "keywords": [
     "react",
     "braintree",
-    "hosted fields"
+    "square",
+    "stripe",
+    "iframe",
+    "hosted fields",
+    "credit card",
+    "payments"
   ],
   "devDependencies": {
     "babel": "^6.23.0",
