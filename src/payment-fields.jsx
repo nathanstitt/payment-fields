@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Vendors from './vendors';
 
-export default class CreditCardFieldsWrapper extends React.Component {
+import Field from './field.jsx';
+
+export default class PaymentFields extends React.Component {
+
+    static Field = Field;
 
     static propTypes = {
+        vendor: PropTypes.string.isRequired,
         children: PropTypes.node.isRequired,
         authorization: PropTypes.string,
-        getTokenRef: PropTypes.func,
+
+        onReady: PropTypes.func.isRequired,
         onValidityChange: PropTypes.func,
         onCardTypeChange: PropTypes.func,
         onError: PropTypes.func,
+
+        passThroughStyles: PropTypes.any,
         styles: PropTypes.object,
         className: PropTypes.string,
         tagName: PropTypes.string,
@@ -17,21 +26,21 @@ export default class CreditCardFieldsWrapper extends React.Component {
 
     static defaultProps = {
         tagName: 'div',
+        styles: {},
     }
 
+    static childContextTypes = {
+        paymentFieldsApi: PropTypes.object,
+    }
 
     constructor(props) {
         super(props);
-        const Api = TYPES[props.type];
+        const Api = Vendors[props.vendor];
         this.api = new Api(props);
     }
 
-
     componentDidMount() {
         this.api.setAuthorization(this.props.authorization);
-        if (this.props.getTokenRef) {
-            this.props.getTokenRef(this.api.tokenize.bind(this.api));
-        }
     }
 
     componentWillUnmount() {
@@ -47,12 +56,12 @@ export default class CreditCardFieldsWrapper extends React.Component {
     }
 
     getChildContext() {
-        return { braintreeApi: this.api };
+        return { paymentFieldsApi: this.api };
     }
 
     render() {
         const { className: providedClass, tagName: Tag } = this.props;
-        let className = 'braintree-hosted-fields-wrapper';
+        let className = 'payment-fields-wrapper';
         if (providedClass) { className += ` ${providedClass}`; }
         return (
             <Tag className={className}>

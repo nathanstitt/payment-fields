@@ -1,5 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import HostedFieldsApi from './hosted-fields-api';
+import Api from './api';
 import { camelCaseKeys } from './util.js';
 
 // pk_Kljj8QJjBXmRjXgP1OyfXSlfku3CX
@@ -27,7 +27,7 @@ const EVENT_DECODERS = {
 };
 
 
-class StripeField extends HostedFieldsApi.Field {
+class StripeField extends Api.Field {
 
     constructor(api, props) {
         super(api, props);
@@ -66,7 +66,7 @@ class StripeField extends HostedFieldsApi.Field {
 }
 
 
-export default class StripeApi extends HostedFieldsApi {
+export default class StripeApi extends Api {
 
     FieldClass = StripeField;
     cardType = '';

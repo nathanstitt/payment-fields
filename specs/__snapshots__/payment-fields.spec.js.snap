@@ -2,22 +2,22 @@
 
 exports[`Braintree Api renders and matches snapshot 1`] = `
 <div
-  className="braintree-hosted-fields-wrapper testing-component"
+  className="payment-fields-wrapper testing-component"
 >
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-1"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-2"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-3"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-4"
   />
 </div>
@@ -25,22 +25,22 @@ exports[`Braintree Api renders and matches snapshot 1`] = `
 
 exports[`Square Api renders and matches snapshot 1`] = `
 <div
-  className="braintree-hosted-fields-wrapper testing-component"
+  className="payment-fields-wrapper testing-component"
 >
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-1"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-2"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-3"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-4"
   />
 </div>
@@ -48,22 +48,22 @@ exports[`Square Api renders and matches snapshot 1`] = `
 
 exports[`Stripe Api renders and matches snapshot 1`] = `
 <div
-  className="braintree-hosted-fields-wrapper testing-component"
+  className="payment-fields-wrapper testing-component"
 >
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-1"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-2"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-3"
   />
   <div
-    className="hosted-card-field"
+    className="payment-field"
     id="field-wrapper-4"
   />
 </div>

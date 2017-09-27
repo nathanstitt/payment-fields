@@ -1,10 +1,10 @@
 import { render } from 'react-dom';
 import React from 'react';
 
-import HostedField from './src/field.jsx';
-import HostedFieldsWrapper from './src/fields-wrapper.jsx';
+import Vendors from './src/vendors';
+import PaymentFields from './src/payment-fields.jsx';
 
-export default class HostedFieldsDemo extends React.PureComponent {
+export default class PaymentFieldsDemo extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -78,7 +78,7 @@ export default class HostedFieldsDemo extends React.PureComponent {
     renderFields() {
         if (!this.state.authorization) { return null; }
         return (
-            <HostedFieldsWrapper
+            <PaymentFields
                 vendor={this.state.type}
                 authorization={this.state.authorization}
                 onError={this.onError}
@@ -100,7 +100,7 @@ export default class HostedFieldsDemo extends React.PureComponent {
                 <div>
                     <h4>Valid: {this.state.valid ? '👍' : '👎'}</h4>
                     Number:
-                    <HostedField
+                    <PaymentFields.Field
                         type="cardNumber"
                         placeholder="•••• •••• •••• ••••"
                         onBlur={this.logEvent}
@@ -109,11 +109,11 @@ export default class HostedFieldsDemo extends React.PureComponent {
                     />
                     <p>Card type: {this.state.card}</p>
                     Date:
-                    <HostedField type="expirationDate" />
+                    <PaymentFields.Field type="expirationDate" />
                     CVV:
-                    <HostedField type="cvv" />
+                    <PaymentFields.Field type="cvv" />
                     Zip:
-                    <HostedField type="postalCode" />
+                    <PaymentFields.Field type="postalCode" />
                 </div>
                 <div className="footer">
                     <button
@@ -123,7 +123,7 @@ export default class HostedFieldsDemo extends React.PureComponent {
                         Get nonce token
                     </button>
                 </div>
-            </HostedFieldsWrapper>
+            </PaymentFields>
         );
     }
 
@@ -133,7 +133,7 @@ export default class HostedFieldsDemo extends React.PureComponent {
         return (
             <div>
                 <div className="type-selection">
-                    {Object.keys(HostedFieldsWrapper.Vendors).map(k => (
+                    {Object.keys(Vendors).map(k => (
                         <label key={k}>
                             <input
                                 type="radio" name="type" checked={k === type}
@@ -141,12 +141,13 @@ export default class HostedFieldsDemo extends React.PureComponent {
                             /> {k}
                         </label>))}
                 </div>
-                <h3>Hosted Fields Demo for: {type}</h3>
-                <label className="authorization">
+                <h3>Payments Field Demo for: {type}</h3>
+                <label >
                     Authorization:
                     <input
                         ref={(r) => { this.inputRef = r; }}
                         type="text"
+                        className="authorization"
                         defaultValue="sandbox_g42y39zw_348pk9cgf3bgyw2b"
                     />
                     <button onClick={this.setAuthorization}>
@@ -165,4 +166,4 @@ export default class HostedFieldsDemo extends React.PureComponent {
 
 }
 
-render(<HostedFieldsDemo />, document.getElementById('root'));
+render(<PaymentFieldsDemo />, document.getElementById('root'));

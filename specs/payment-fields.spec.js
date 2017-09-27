@@ -2,10 +2,9 @@ import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Braintree from './braintree-mocks';
 import Square from './square-mocks.js';
-import Stripe from './stripe-mocks.js'
+import Stripe from './stripe-mocks.js';
 import TestingComponent from './testing-component-factory.jsx';
-import { resetIDCounter } from '../src/hosted-fields-api';
-
+import { resetIDCounter } from '../src/api';
 
 const Mocks = {
     Braintree,

@@ -112,14 +112,6 @@ export default class ClientApi {
         }
     }
 
-    focusField(fieldType, cb) {
-        this.hostedFields.focus(fieldType, cb);
-    }
-
-    clearField(fieldType, cb) {
-        this.hostedFields.clear(fieldType, cb);
-    }
-
     onFieldEvent(event) {
         if (this.wrapperHandlers[event.type]) {
             this.wrapperHandlers[event.type](event);
@@ -128,8 +120,6 @@ export default class ClientApi {
 
     // the following fields are implemented in each client lib
     createInstance() {}
-
-    createdHostedFields() { }
 
     tokenize() { }
 

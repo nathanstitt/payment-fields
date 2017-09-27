@@ -1,10 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import HostedFieldsApi from './hosted-fields-api';
+import Api from './api';
 import { camelCaseKeys } from './util';
-    // The Square docs note:
-    // If you host a copy of this library on your own server, or use a copy hosted on a third-party server,
-    // your application will be disabled without notice.
-    // we have no choice but to load and pollute the global namespace.
 
 export const EVENTS_MAP = {
     focusClassAdded: 'onFocus',
@@ -25,7 +21,7 @@ const EVENT_DECODERS = {
 
 // sandbox-sq0idp-i06hC8ZeXrqOujH_QfYt5Q
 
-export class SquareField extends HostedFieldsApi.Field {
+export class SquareField extends Api.Field {
 
     constructor(api, props) {
         super(api, props);
@@ -35,7 +31,7 @@ export class SquareField extends HostedFieldsApi.Field {
 }
 
 
-export default class SquareApi extends HostedFieldsApi {
+export default class SquareApi extends Api {
 
     FieldClass = SquareField;
 

@@ -1,4 +1,4 @@
-import HostedFieldsApi from './hosted-fields-api';
+import Api from './api';
 
 // sandbox_g42y39zw_348pk9cgf3bgyw2b
 
@@ -24,19 +24,17 @@ export const TYPES_MAP = {
     cardNumber: 'number',
 };
 
-export class BraintreeField extends HostedFieldsApi.Field {
+export class BraintreeField extends Api.Field {
 
     constructor(api, props) {
         super(api, props);
-
         this.type = TYPES_MAP[this.type] || this.type;
-
         this.options.selector = `#${this.id}`;
     }
 
 }
 
-export default class BraintreeApi extends HostedFieldsApi {
+export default class BraintreeApi extends Api {
 
 
     FieldClass = BraintreeField;

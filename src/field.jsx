@@ -1,7 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 
-export default class HostedField extends React.Component {
+export default class Field extends React.Component {
 
     static propTypes = {
         type: PropTypes.oneOf([
@@ -19,23 +19,23 @@ export default class HostedField extends React.Component {
     }
 
     static contextTypes = {
-        hostedFieldsApi: PropTypes.object,
+        paymentFieldsApi: PropTypes.object,
     }
 
     focus() {
-        this.context.hostedFieldsApi.focusField(this.props.type);
+        this.context.paymentFieldsApi.focusField(this.props.type);
     }
 
     clear() {
-        this.context.hostedFieldsApi.clearField(this.props.type);
+        this.context.paymentFieldsApi.clearField(this.props.type);
     }
 
     componentWillMount() {
-        this.fieldId = this.context.hostedFieldsApi.checkInField(this.props);
+        this.fieldId = this.context.paymentFieldsApi.checkInField(this.props);
     }
 
     get className() {
-        const list = ['hosted-card-field'];
+        const list = ['payment-field'];
         if (this.props.className) { list.push(this.props.className); }
         return list.join(' ');
     }

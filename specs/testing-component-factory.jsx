@@ -1,6 +1,5 @@
 import React from 'react';
-import HostedField from '../src/field.jsx';
-import HostedFieldsWrapper from '../src/fields-wrapper.jsx';
+import PaymentFields from '../src/payment-fields.jsx';
 
 export default {
 
@@ -13,7 +12,7 @@ export default {
         authorization = 'sandbox_test_one_two_three',
     } = {}) {
         return (
-            <HostedFieldsWrapper
+            <PaymentFields
                 className="testing-component"
                 vendor={vendor}
                 authorization={authorization}
@@ -21,11 +20,11 @@ export default {
                 onReady={onReady}
                 styles={styles}
             >
-                <HostedField type="cardNumber"      placeholder="cc #"  {...props.cardNumber}      />
-                <HostedField type="expirationDate"  placeholder="date"  {...props.expirationDate}  />
-                <HostedField type="cvv"             placeholder="cvv"   {...props.cvv}             />
-                <HostedField type="postalCode"      placeholder="zip"   {...props.postalCode}      />
-            </HostedFieldsWrapper>
+                <PaymentFields.Field type="cardNumber"     placeholder="cc #" {...props.cardNumber}      />
+                <PaymentFields.Field type="expirationDate" placeholder="date" {...props.expirationDate}  />
+                <PaymentFields.Field type="cvv"            placeholder="cvv"  {...props.cvv}             />
+                <PaymentFields.Field type="postalCode"     placeholder="zip"  {...props.postalCode}      />
+            </PaymentFields>
         );
     },
 
