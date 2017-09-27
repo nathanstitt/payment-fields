@@ -1,6 +1,6 @@
 {
   "name": "payment-fields",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React component for Braintree/Stripe/Square payment fields",
   "main": "dist/build.full.js",
   "module": "dist/build.module.js",
@@ -9,8 +9,8 @@
   "author": "Nathan Stitt",
   "license": "MIT",
   "peerDependencies": {
-      "prop-types": ">=14.0",
-      "react": ">=14.0"
+    "prop-types": ">=14.0",
+    "react": ">=14.0"
   },
   "scripts": {
     "test": "$(npm bin)/jest",
