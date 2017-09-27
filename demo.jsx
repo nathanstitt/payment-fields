@@ -148,7 +148,6 @@ export default class PaymentFieldsDemo extends React.PureComponent {
                         ref={(r) => { this.inputRef = r; }}
                         type="text"
                         className="authorization"
-                        defaultValue="sandbox_g42y39zw_348pk9cgf3bgyw2b"
                     />
                     <button onClick={this.setAuthorization}>
                         Render

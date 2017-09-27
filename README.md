@@ -9,3 +9,5 @@ This is intended for a Saas that allows customers to use their own payment proce
 further docs to be written
 
 [![Build Status](https://travis-ci.org/nathanstitt/payment-fields.svg?branch=master)](https://travis-ci.org/nathanstitt/payment-fields)
+
+See [demo site](https://nathanstitt.github.io/payment-fields/) for a working example. It renders [demo.jsx](demo.jsx)
