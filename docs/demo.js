@@ -10629,8 +10629,7 @@ var PaymentFieldsDemo = function (_React$PureComponent) {
                             _this3.inputRef = r;
                         },
                         type: 'text',
-                        className: 'authorization',
-                        defaultValue: 'sandbox_g42y39zw_348pk9cgf3bgyw2b'
+                        className: 'authorization'
                     }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                         'button',
