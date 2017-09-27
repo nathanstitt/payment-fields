@@ -3,7 +3,7 @@ import babel from 'rollup-plugin-babel';
 const pkg = require('./package.json');
 
 export default {
-    entry: 'src/index.js',
+    entry: './src/payment-fields.jsx',
     plugins: [
         babel({
             babelrc: true,
@@ -18,17 +18,16 @@ export default {
     ],
     globals: {
         react: 'React',
+        loadjs: 'loadjs',
         invariant: 'invariant',
         'prop-types': 'PropTypes',
-        'braintree-web/client': 'Braintree',
-        'braintree-web/hosted-fields': 'HostedFields',
     },
-    external: ['react', 'prop-types', 'braintree-web/client', 'braintree-web/hosted-fields'],
+    external: ['react', 'loadjs', 'prop-types'],
     targets: [
         {
             dest: pkg.main,
             format: 'umd',
-            moduleName: 'react-braintree-fields',
+            moduleName: 'payment-fields',
             sourceMap: true,
         }, {
             dest: pkg.module,
