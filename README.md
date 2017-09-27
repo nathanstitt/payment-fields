@@ -7,3 +7,5 @@ Care is taken so the API is (nearly) identical across the vendors.
 This is intended for a Saas that allows customers to use their own payment processor, as long as it's uses the newish "hosted iframe" approach.
 
 further docs to be written
+
+[![Build Status](https://travis-ci.org/nathanstitt/payment-fields.svg?branch=master)](https://travis-ci.org/nathanstitt/payment-fields)
