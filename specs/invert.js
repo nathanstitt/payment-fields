@@ -1,7 +1,6 @@
 export default function invert(obj) {
-    const inverted = {};
-    for (let prop in obj) { // eslint-disable-line
-        inverted[obj[prop]] = prop;
-    }
-    return inverted;
+    return Object.keys(obj).reduce((inverted, key) => {
+        inverted[obj[key]] = key; // eslint-disable-line no-param-reassign
+        return inverted;
+    }, {});
 }

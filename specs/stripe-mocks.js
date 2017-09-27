@@ -1,13 +1,10 @@
 import loadjs from 'loadjs';
 import VendorMock from './vendor-mock';
-import invert from './invert';
 import { camelCaseKeys } from '../src/util';
-import { TYPES_MAP, EVENTS_MAP } from '../src/stripe';
+import { TYPES_MAP } from '../src/stripe';
 
 jest.mock('loadjs');
 
-const INVERTED_TYPES_MAP = invert(TYPES_MAP);
-const INVERTED_EVENTS_MAP = invert(EVENTS_MAP);
 
 export default class StripeMocks extends VendorMock {
 
