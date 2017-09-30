@@ -8,6 +8,7 @@ const EVENTS_MAP = {
     onChange: 'change',
     onBlur:   'blur',
     onFocus:  'focus',
+
 };
 
 export const TYPES_MAP = {
@@ -16,6 +17,9 @@ export const TYPES_MAP = {
 };
 
 const EVENT_DECODERS = {
+    onValidityChange(event) {
+        return { isValid: event.isValid };
+    },
 
     onCardTypeChange(event) {
         return Object.assign(
@@ -35,14 +39,21 @@ class StripeField extends Api.Field {
         if (!this.options.style) {
             this.options.style = this.api.fieldStyles;
         }
+        this.isValid = false;
     }
 
     mount(elements) {
         this.element = elements.create(this.type, this.options);
         this.element.mount(this.selector);
         this.element.addEventListener('change', (ev) => {
-            this.isValid = ev.complete;
-            this.api.onFieldValidity(this);
+            if (ev.complete !== this.isValid) {
+                this.isValid = ev.complete;
+                if (this.events.onValidityChange) {
+                    event.isValid = ev.complete;
+                    this.api.onFieldEvent('onValidityChange', this, event);
+                }
+                this.api.onFieldValidity(this);
+            }
         });
 
         if ('cardNumber' === this.type) {
@@ -51,6 +62,7 @@ class StripeField extends Api.Field {
             });
             this.element.addEventListener('change', ev => this.api.onCardChange(ev));
         }
+
         for (const evName in this.events) { // eslint-disable-line
             this.element.addEventListener(
                 EVENTS_MAP[evName] || evName,
@@ -98,6 +110,7 @@ export default class StripeApi extends Api {
         for (const type in this.fields) { // eslint-disable-line
             if (!this.fields[type].isValid) {
                 super.onFieldValidity({ isValid: false });
+                return;
             }
         }
         super.onFieldValidity({ isValid: true });
@@ -125,12 +138,10 @@ export default class StripeApi extends Api {
             type: eventName,
             event,
         }, attrs);
-
         field.emit(sanitizedEvent);
 
         if ('onValidityChange' === eventName) {
-            const isValid = !Object.keys(event.fields).find(f => false === event.fields[f].isValid);
-            this.onFieldValidity(Object.assign(sanitizedEvent, { isValid }));
+            this.onFieldValidity();
         } else {
             super.onFieldEvent(sanitizedEvent);
         }

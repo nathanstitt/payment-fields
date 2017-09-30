@@ -18,7 +18,10 @@ export default class StripeMocks extends VendorMock {
             mount = jest.fn()
 
             addEventListener = jest.fn((eventName, cb) => {
-                this.listeners[eventName] = cb;
+                if (!this.listeners[eventName]) {
+                    this.listeners[eventName] = [];
+                }
+                this.listeners[eventName].push(cb);
                 if ('ready' === eventName) { cb(); }
             })
 
@@ -63,17 +66,17 @@ export default class StripeMocks extends VendorMock {
 
     emitFocusEvent(f) {
         const field = TYPES_MAP[f] || f;
-        this.fields[field].listeners.focus({ type: 'focus' });
+        this.fields[field].listeners.focus.forEach(cb => cb({ type: 'focus' }));
     }
 
     emitBlurEvent(f) {
         const field = TYPES_MAP[f] || f;
-        this.fields[field].listeners.blur({ type: 'blur' });
+        this.fields[field].listeners.blur.forEach(cb => cb({ type: 'blur' }));
     }
 
     emitValid(v) {
         Object.keys(this.fields).forEach((f) => {
-            this.fields[f].listeners.change({ complete: v });
+            this.fields[f].listeners.change.forEach(cb => cb({ complete: v }));
         });
     }
 

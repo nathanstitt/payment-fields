@@ -9,7 +9,7 @@ export default class Field extends React.Component {
         ]).isRequired,
         placeholder: PropTypes.string,
         className: PropTypes.string,
-
+        onValidityChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
     }

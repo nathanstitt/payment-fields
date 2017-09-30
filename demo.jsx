@@ -17,9 +17,10 @@ export default class PaymentFieldsDemo extends React.PureComponent {
             'onCardTypeChange',
             'onValidityChange',
             'setAuthorization',
+            'onNumberValid',
         ].forEach((prop) => { this[prop] = this[prop].bind(this); });
         this.state = {
-            type: 'Braintree',
+            type: 'Stripe',
             valid: false,
             log: [],
             isEnabled: false,
@@ -34,6 +35,10 @@ export default class PaymentFieldsDemo extends React.PureComponent {
         this.setState({
             log: [`${msg} : ${JSON.stringify(attrs)}`].concat(this.state.log),
         });
+    }
+
+    onNumberValid(ev) {
+        this.setState({ numberIsValid: ev.isValid })
     }
 
     onTypeChange(ev) {
@@ -99,12 +104,13 @@ export default class PaymentFieldsDemo extends React.PureComponent {
             >
                 <div>
                     <h4>Valid: {this.state.valid ? '👍' : '👎'}</h4>
-                    Number:
+                    Number: {this.state.numberIsValid ? '👍' : '👎'}
                     <PaymentFields.Field
                         type="cardNumber"
                         placeholder="•••• •••• •••• ••••"
                         onBlur={this.logEvent}
                         onFocus={this.logEvent}
+                        onValidityChange={this.onNumberValid}
                         onChange={this.logEvent}
                     />
                     <p>Card type: {this.state.card}</p>

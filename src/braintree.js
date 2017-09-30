@@ -12,9 +12,10 @@ export const EVENTS_MAP = {
 const EVENT_DECODERS = {
 
     onCardTypeChange(event) {
+        const card = (1 === event.cards.length) ? event.cards[0] : {};
         return Object.assign(
-            event.cards[0],
-            { type: 'onCardTypeChange', brand: event.cards[0].type },
+            card,
+            { type: 'onCardTypeChange', brand: card.type },
         );
     },
 
@@ -107,11 +108,15 @@ export default class BraintreeApi extends Api {
             type,
             event,
         }, attrs);
-
+        if ('validityChange' === eventName) {
+            sanitizedEvent.isValid = event.fields[event.emittedBy].isValid;
+        }
         field.emit(sanitizedEvent);
 
         if ('validityChange' === eventName) {
-            const isValid = !Object.keys(event.fields).find(f => false === event.fields[f].isValid);
+            const isValid = !Object.keys(event.fields).find(f =>
+                false === event.fields[f].isValid,
+            );
             this.onFieldValidity(Object.assign(sanitizedEvent, { isValid }));
         } else {
             super.onFieldEvent(sanitizedEvent);
