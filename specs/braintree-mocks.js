@@ -45,11 +45,25 @@ export default class BraintreeMocks extends VendorMock {
     }
 
     emitFocusEvent(field) {
-        this.getCb('focus')({ emittedBy: INVERTED_TYPES_MAP[field] || field, type: 'onFocus' });
+        const emittedBy = INVERTED_TYPES_MAP[field] || field;
+        this.getCb('focus')({
+            emittedBy,
+            type: 'onFocus',
+            fields: {
+                [`${emittedBy}`]: { isValid: false },
+            },
+        });
     }
 
     emitBlurEvent(field) {
-        this.getCb('blur')({ emittedBy: INVERTED_TYPES_MAP[field] || field, type: 'onBlur' });
+        const emittedBy = INVERTED_TYPES_MAP[field] || field;
+        this.getCb('blur')({
+            emittedBy,
+            type: 'onBlur',
+            fields: {
+                [`${emittedBy}`]: { isValid: false },
+            },
+        });
     }
 
     emitValid(val) {

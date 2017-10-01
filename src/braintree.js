@@ -107,10 +107,8 @@ export default class BraintreeApi extends Api {
             field: field.props.type,
             type,
             event,
+            isValid: event.fields[event.emittedBy].isValid,
         }, attrs);
-        if ('validityChange' === eventName) {
-            sanitizedEvent.isValid = event.fields[event.emittedBy].isValid;
-        }
         field.emit(sanitizedEvent);
 
         if ('validityChange' === eventName) {

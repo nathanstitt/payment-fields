@@ -29,12 +29,12 @@ export class SquareField extends Api.Field {
     }
 
     emit(ev) {
+        ev.isValid = ev.event.currentState.isCompletelyValid;
         super.emit(ev);
         if (this.isValid !== ev.event.currentState.isCompletelyValid) {
             this.isValid = ev.event.currentState.isCompletelyValid;
-            super.emit(Object.assign(ev, {
+            super.emit(Object.assign({}, ev, {
                 type: 'onValidityChange',
-                isValid: this.isValid,
             }));
         }
     }

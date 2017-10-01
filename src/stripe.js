@@ -136,6 +136,7 @@ export default class StripeApi extends Api {
         const sanitizedEvent = Object.assign({
             field: field.props.type,
             type: eventName,
+            isValid: field.isValid,
             event,
         }, attrs);
         field.emit(sanitizedEvent);
