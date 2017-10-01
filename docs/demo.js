@@ -6569,17 +6569,15 @@ var ClientApi = function () {
         this.fields = Object.create(null);
         this.fieldHandlers = Object.create(null);
 
-        var authorization = props.authorization,
+        var _ = props.authorization,
             styles = props.styles,
             callbacks = _objectWithoutProperties(props, ['authorization', 'styles']);
 
         this.styles = styles || {};
         this.wrapperHandlers = callbacks || {};
         this.tokenize = this.tokenize.bind(this);
-        if (isReady) {
-            this.setAuthorization(authorization);
-        } else {
-            this.fetch(urls, authorization);
+        if (!isReady) {
+            this.fetch(urls);
         }
     }
 
@@ -6590,25 +6588,23 @@ var ClientApi = function () {
         }
     }, {
         key: 'fetch',
-        value: function fetch(urls, authorization) {
+        value: function fetch(urls) {
             var _this = this;
 
-            this.pendingLoad = urls.map(function (url) {
-                return new Promise(function (success, error) {
-                    __WEBPACK_IMPORTED_MODULE_0_loadjs___default()(url, { success: success, error: error });
-                });
+            __WEBPACK_IMPORTED_MODULE_0_loadjs___default()(urls, {
+                success: function success() {
+                    if (_this.pendingAuthorization) {
+                        _this.setAuthorization(_this.pendingAuthorization);
+                    }
+                },
+                error: this.onError.bind(this)
             });
-            return Promise.all(this.pendingLoad).then(function () {
-                _this.pendingLoad = null;
-                if (authorization) {
-                    _this.setAuthorization(authorization);
-                }
-            }).catch(this.onError.bind(this));
         }
     }, {
         key: 'setAuthorization',
         value: function setAuthorization(authorization) {
             if (!this.isApiReady()) {
+                this.pendingAuthorization = authorization;
                 return;
             }
             if (!authorization && this.authorization) {
