@@ -6,7 +6,7 @@ export default class VendorMock {
 
     constructor() {
         const mock = this;
-        loadjs.mockImplementation(jest.fn((url, { success }) => {
+        loadjs.mockImplementation(jest.fn((urls, { success }) => {
             if (!mock.mock) { mock.install(mock); }
             success();
         }));

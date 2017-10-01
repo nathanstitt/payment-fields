@@ -48,9 +48,9 @@ export default class StripeMocks extends VendorMock {
     }
 
     expectInitialized({ authorization, styles = {} }) {
-        expect(loadjs).toHaveBeenCalledWith(
-            'https://js.stripe.com/v3/', expect.anything(),
-        );
+        expect(loadjs).toHaveBeenCalledWith([
+            'https://js.stripe.com/v3/',
+        ], expect.anything());
         expect(global.Stripe).toHaveBeenCalledWith(authorization);
         const fields = Object.keys(this.fields);
         expect(fields).toEqual(

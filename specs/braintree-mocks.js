@@ -29,10 +29,11 @@ export default class BraintreeMocks extends VendorMock {
 
     expectInitialized({ authorization, styles = {} }) {
         expect(loadjs).toHaveBeenCalledWith(
-            'https://js.braintreegateway.com/web/3.22.2/js/client.js', expect.anything(),
-        );
-        expect(loadjs).toHaveBeenCalledWith(
-            'https://js.braintreegateway.com/web/3.22.2/js/hosted-fields.js', expect.anything(),
+            [
+                'https://js.braintreegateway.com/web/3.22.2/js/client.js',
+                'https://js.braintreegateway.com/web/3.22.2/js/hosted-fields.js',
+            ],
+            expect.anything(),
         );
         expect(global.braintree.client.create).toHaveBeenCalledWith(
             { authorization }, expect.anything());

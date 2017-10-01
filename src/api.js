@@ -52,14 +52,12 @@ export default class ClientApi {
     fieldHandlers = Object.create(null);
 
     constructor({ isReady, urls, props }) {
-        const { authorization, styles, ...callbacks } = props;
+        const { authorization: _, styles, ...callbacks } = props;
         this.styles = styles || {};
         this.wrapperHandlers = callbacks || {};
         this.tokenize = this.tokenize.bind(this);
-        if (isReady) {
-            this.setAuthorization(authorization);
-        } else {
-            this.fetch(urls, authorization);
+        if (!isReady) {
+            this.fetch(urls);
         }
     }
 
@@ -67,18 +65,22 @@ export default class ClientApi {
         return false;
     }
 
-    fetch(urls, authorization) {
-        this.pendingLoad = urls.map(url => new Promise((success, error) => {
-            loadjs(url, { success, error });
-        }));
-        return Promise.all(this.pendingLoad).then(() => {
-            this.pendingLoad = null;
-            if (authorization) { this.setAuthorization(authorization); }
-        }).catch(this.onError.bind(this));
+    fetch(urls) {
+        loadjs(urls, {
+            success: () => {
+                if (this.pendingAuthorization) {
+                    this.setAuthorization(this.pendingAuthorization);
+                }
+            },
+            error: this.onError.bind(this),
+        });
     }
 
     setAuthorization(authorization) {
-        if (!this.isApiReady()) { return; }
+        if (!this.isApiReady()) {
+            this.pendingAuthorization = authorization;
+            return;
+        }
         if (!authorization && this.authorization) {
             this.teardown();
         } else if (authorization && authorization !== this.authorization) {

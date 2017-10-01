@@ -28,9 +28,9 @@ export default class SquareMocks extends VendorMock {
     }
 
     expectInitialized({ authorization, styles = {} }) {
-        expect(loadjs).toHaveBeenCalledWith(
-            'https://js.squareup.com/v2/paymentform', expect.anything(),
-        );
+        expect(loadjs).toHaveBeenCalledWith([
+            'https://js.squareup.com/v2/paymentform',
+        ], expect.anything());
         expect(this.mock.options.applicationId).toEqual(authorization);
         expect(this.mock.options.inputStyles[0]).toEqual(camelCaseKeys(styles.base));
         expect(this.mock.build).toHaveBeenCalled();
