@@ -22707,11 +22707,9 @@ var BraintreeApi = function (_Api) {
             var sanitizedEvent = Object.assign({
                 field: field.props.type,
                 type: type,
-                event: event
+                event: event,
+                isValid: event.fields[event.emittedBy].isValid
             }, attrs);
-            if ('validityChange' === eventName) {
-                sanitizedEvent.isValid = event.fields[event.emittedBy].isValid;
-            }
             field.emit(sanitizedEvent);
 
             if ('validityChange' === eventName) {
@@ -23094,6 +23092,20 @@ var SquareField = function (_Api$Field) {
         return _this;
     }
 
+    _createClass(SquareField, [{
+        key: 'emit',
+        value: function emit(ev) {
+            ev.isValid = ev.event.currentState.isCompletelyValid;
+            _get(SquareField.prototype.__proto__ || Object.getPrototypeOf(SquareField.prototype), 'emit', this).call(this, ev);
+            if (this.isValid !== ev.event.currentState.isCompletelyValid) {
+                this.isValid = ev.event.currentState.isCompletelyValid;
+                _get(SquareField.prototype.__proto__ || Object.getPrototypeOf(SquareField.prototype), 'emit', this).call(this, Object.assign({}, ev, {
+                    type: 'onValidityChange'
+                }));
+            }
+        }
+    }]);
+
     return SquareField;
 }(__WEBPACK_IMPORTED_MODULE_1__api__["a" /* default */].Field);
 
@@ -23376,6 +23388,7 @@ var StripeApi = function (_Api) {
             var sanitizedEvent = Object.assign({
                 field: field.props.type,
                 type: eventName,
+                isValid: field.isValid,
                 event: event
             }, attrs);
             field.emit(sanitizedEvent);
