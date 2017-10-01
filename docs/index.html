@@ -4,7 +4,7 @@
         <title>React Braintree Hosted Fields Demo</title>
         <meta charset="utf-8">
         <style>
-          .payment-field:not(iframe) {
+          .payment-field {
               height: 40px;
               border: 1px solid black;
               display: flex;
@@ -12,6 +12,9 @@
               flex-direction: column;
               padding: 0 1rem;
               margin-bottom: 1rem;
+          }
+          iframe.payment-field {
+              padding: 0;
           }
           .footer {
               display:flex;
