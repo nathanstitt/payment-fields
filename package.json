@@ -1,6 +1,6 @@
 {
   "name": "payment-fields",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "React component for Braintree/Stripe/Square payment fields",
   "main": "dist/build.full.js",
   "module": "dist/build.module.js",
