@@ -28,6 +28,17 @@ export class SquareField extends Api.Field {
         this.options.elementId = this.id;
     }
 
+    emit(ev) {
+        super.emit(ev);
+        if (this.isValid !== ev.event.currentState.isCompletelyValid) {
+            this.isValid = ev.event.currentState.isCompletelyValid;
+            super.emit(Object.assign(ev, {
+                type: 'onValidityChange',
+                isValid: this.isValid,
+            }));
+        }
+    }
+
 }
 
 
