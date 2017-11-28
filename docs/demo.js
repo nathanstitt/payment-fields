@@ -23193,7 +23193,7 @@ var SquareApi = function (_Api) {
             var _this3 = this;
 
             if (this.pendingToken) {
-                return Promise.reject({ errors: ['tokenization in progress'] });
+                return Promise.reject(new Error('tokenization in progress'));
             }
             return new Promise(function (resolve, reject) {
                 _this3.pendingToken = { resolve: resolve, reject: reject };
@@ -23290,8 +23290,8 @@ var StripeField = function (_Api$Field) {
                 if (ev.complete !== _this2.isValid) {
                     _this2.isValid = ev.complete;
                     if (_this2.events.onValidityChange) {
-                        event.isValid = ev.complete;
-                        _this2.api.onFieldEvent('onValidityChange', _this2, event);
+                        ev.isValid = ev.complete;
+                        _this2.api.onFieldEvent('onValidityChange', _this2, ev);
                     }
                     _this2.api.onFieldValidity(_this2);
                 }
@@ -23528,15 +23528,13 @@ var PaymentFields = function (_React$Component) {
 
 PaymentFields.Field = __WEBPACK_IMPORTED_MODULE_3__field_jsx__["a" /* default */];
 PaymentFields.propTypes = {
-    vendor: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string.isRequired,
+    vendor: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOf(Object.keys(__WEBPACK_IMPORTED_MODULE_2__vendors__["a" /* default */])).isRequired,
     children: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.node.isRequired,
+    onReady: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
     authorization: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-
-    onReady: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
     onValidityChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
     onCardTypeChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
     onError: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-
     passThroughStyles: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.any,
     styles: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
     className: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
