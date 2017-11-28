@@ -49,8 +49,8 @@ class StripeField extends Api.Field {
             if (ev.complete !== this.isValid) {
                 this.isValid = ev.complete;
                 if (this.events.onValidityChange) {
-                    event.isValid = ev.complete;
-                    this.api.onFieldEvent('onValidityChange', this, event);
+                    ev.isValid = ev.complete;
+                    this.api.onFieldEvent('onValidityChange', this, ev);
                 }
                 this.api.onFieldValidity(this);
             }

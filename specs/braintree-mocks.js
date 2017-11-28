@@ -36,7 +36,8 @@ export default class BraintreeMocks extends VendorMock {
             expect.anything(),
         );
         expect(global.braintree.client.create).toHaveBeenCalledWith(
-            { authorization }, expect.anything());
+            { authorization }, expect.anything(),
+        );
         expect(global.braintree.hostedFields.create).toHaveBeenCalledWith(
             expect.objectContaining({
                 styles: { input: styles.base },

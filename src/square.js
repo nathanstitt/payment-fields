@@ -114,7 +114,7 @@ export default class SquareApi extends Api {
 
     tokenize() {
         if (this.pendingToken) {
-            return Promise.reject({ errors: ['tokenization in progress'] });
+            return Promise.reject(new Error('tokenization in progress'));
         }
         return new Promise((resolve, reject) => {
             this.pendingToken = { resolve, reject };
