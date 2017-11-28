@@ -1,6 +1,6 @@
 # Integrate Braintree/Stripe/Square payment fields
 
-A React component to make integrating [Braintree's Hosted Fields](https://developers.braintreepayments.com/guides/hosted-fields/), [Stripe's ELements](https://stripe.com/docs/elements) and [Square's Payment Form](https://docs.connect.squareup.com/articles/adding-payment-form) easier.
+A React component to make integrating [Braintree's Hosted Fields](https://developers.braintreepayments.com/guides/hosted-fields/), [Stripe's Elements](https://stripe.com/docs/elements) and [Square's Payment Form](https://docs.connect.squareup.com/articles/adding-payment-form) easier.
 
 Care is taken so the API is (nearly) identical across the vendors.
 
@@ -84,7 +84,7 @@ Props:
  * onCardTypeChange: Called as soon as the card type is known and whenever it changes.   Passed a single object with a `brand` property.  The object may have other type specific properties as well.
  * onError: A function called whenever an error occurs, typically during tokenization but some vendors (Square at least) will also call it when the fields fail to initialize.
  * styles: A object that contains 'base', 'focus', 'valid', and 'invalid' properties.   The `PaymentFields` component will convert the styles to match each vendor's method of specifying them and attempt to find the lowest common denominator.  `color` and `font-size` are universally supported.
- * passThroughStyles: For when the `styles` property doesn't offer enough control.  Anything speficied here will be passed through to the vendor specific api in place of the `styles`.
+ * passThroughStyles: For when the `styles` property doesn't offer enough control.  Anything specified here will be passed through to the vendor specific api in place of the `styles`.
  * tagName: which element to use as a wrapper element.  Defaults to `div`
  * className: a className to set on the wrapper element, it's applied in addition to `payment-fields-wrapper`
 
