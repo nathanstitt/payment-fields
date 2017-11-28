@@ -9,15 +9,13 @@ export default class PaymentFields extends React.Component {
     static Field = Field;
 
     static propTypes = {
-        vendor: PropTypes.string.isRequired,
+        vendor: PropTypes.oneOf(Object.keys(Vendors)).isRequired,
         children: PropTypes.node.isRequired,
+        onReady: PropTypes.func,
         authorization: PropTypes.string,
-
-        onReady: PropTypes.func.isRequired,
         onValidityChange: PropTypes.func,
         onCardTypeChange: PropTypes.func,
         onError: PropTypes.func,
-
         passThroughStyles: PropTypes.any,
         styles: PropTypes.object,
         className: PropTypes.string,
