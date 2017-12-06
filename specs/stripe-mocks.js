@@ -76,7 +76,7 @@ export default class StripeMocks extends VendorMock {
 
     emitValid(v) {
         Object.keys(this.fields).forEach((f) => {
-            this.fields[f].listeners.change.forEach(cb => cb({ complete: v }));
+            this.fields[f].listeners.change.forEach(cb => cb({ error: !v }));
         });
     }
 

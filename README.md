@@ -96,4 +96,4 @@ Props:
  * className: a className to set on the placeholder element, some vendors will replace the placeholder with an iframe, while others will render the iframe inside the placeholder.  All vendors retain the className property though so it's safe to use this for some styling.
  * onValidityChange: A function  called when the field's validity changes.  Like the onValidityChange on the main PaymentFields wrapper, may be called repeatedly with the same status
  * onFocus: A function called when the field is focused.  Will be called with the vendor specific event
- * onBlur:  A function called when the field loses focus.  Will be called with the vendor specific event, as well as a `isValid` property that indicates if the field is valid.
+ * onBlur:  A function called when the field loses focus.  Will be called with the vendor specific event, as well as a `isValid` property that indicates if the field is valid, and `isPotentiallyValid` which is set if the input is possibily valid but still incomplete.

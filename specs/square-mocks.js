@@ -40,8 +40,8 @@ export default class SquareMocks extends VendorMock {
         this.mock.options.callbacks.inputEventReceived({
             field,
             eventType: INVERTED_EVENTS_MAP.onFocus,
-            previousState: { isCompletelyValid: false },
-            currentState: { isCompletelyValid: false },
+            previousState: { isCompletelyValid: false, isPotentiallyValid: true },
+            currentState: { isCompletelyValid: false, isPotentiallyValid: true },
         });
     }
 
@@ -49,8 +49,8 @@ export default class SquareMocks extends VendorMock {
         this.mock.options.callbacks.inputEventReceived({
             field,
             eventType: INVERTED_EVENTS_MAP.onBlur,
-            previousState: { isCompletelyValid: false },
-            currentState: { isCompletelyValid: false },
+            previousState: { isCompletelyValid: false, isPotentiallyValid: true },
+            currentState: { isCompletelyValid: false, isPotentiallyValid: true },
         });
     }
 
@@ -58,8 +58,8 @@ export default class SquareMocks extends VendorMock {
         this.mock.options.callbacks.inputEventReceived({
             field: 'postalCode',
             eventType: INVERTED_EVENTS_MAP.onBlur,
-            currentState: { isCompletelyValid: val },
-            previousState: { isCompletelyValid: !val },
+            currentState: { isCompletelyValid: val, isPotentiallyValid: true },
+            previousState: { isCompletelyValid: !val, isPotentiallyValid: true },
         });
     }
 

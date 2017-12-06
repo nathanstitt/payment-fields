@@ -46,10 +46,9 @@ class StripeField extends Api.Field {
         this.element = elements.create(this.type, this.options);
         this.element.mount(this.selector);
         this.element.addEventListener('change', (ev) => {
-            if (ev.complete !== this.isValid) {
-                this.isValid = ev.complete;
+            if (ev.isValid !== this.isValid) {
+                this.isValid = !ev.error;
                 if (this.events.onValidityChange) {
-                    ev.isValid = ev.complete;
                     this.api.onFieldEvent('onValidityChange', this, ev);
                 }
                 this.api.onFieldValidity(this);
@@ -132,11 +131,13 @@ export default class StripeApi extends Api {
 
     onFieldEvent(eventName, field, event) {
         const attrs = EVENT_DECODERS[eventName] ? EVENT_DECODERS[eventName](event) : {};
-
+        // ev.isValid = this.isValid;
+        // ev.isPotentiallyValid = !ev.error;
         const sanitizedEvent = Object.assign({
             field: field.props.type,
             type: eventName,
-            isValid: field.isValid,
+            isValid: !!event.isValid,
+            isPotentiallyValid: !event.error,
             event,
         }, attrs);
         field.emit(sanitizedEvent);

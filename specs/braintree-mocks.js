@@ -51,7 +51,7 @@ export default class BraintreeMocks extends VendorMock {
             emittedBy,
             type: 'onFocus',
             fields: {
-                [`${emittedBy}`]: { isValid: false },
+                [`${emittedBy}`]: { isValid: false, isPotentiallyValid: true },
             },
         });
     }
@@ -62,7 +62,7 @@ export default class BraintreeMocks extends VendorMock {
             emittedBy,
             type: 'onBlur',
             fields: {
-                [`${emittedBy}`]: { isValid: false },
+                [`${emittedBy}`]: { isValid: false, isPotentiallyValid: true },
             },
         });
     }

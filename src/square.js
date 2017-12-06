@@ -29,7 +29,10 @@ export class SquareField extends Api.Field {
     }
 
     emit(ev) {
-        ev.isValid = ev.event.currentState.isCompletelyValid;
+        Object.assign(ev, {
+            isValid: ev.event.currentState.isCompletelyValid,
+            isPotentiallyValid: ev.event.currentState.isPotentiallyValid,
+        });
         super.emit(ev);
         if (this.isValid !== ev.event.currentState.isCompletelyValid) {
             this.isValid = ev.event.currentState.isCompletelyValid;
@@ -98,6 +101,7 @@ export default class SquareApi extends Api {
             this.onFieldValidity(Object.assign(sanitizedEvent, {
                 type: 'validityChange',
                 isValid: event.currentState.isCompletelyValid,
+                isPotentiallyValid: event.currentState.isPotentiallyValid,
             }));
         }
     }

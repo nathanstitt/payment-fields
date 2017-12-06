@@ -61,14 +61,14 @@ const Mocks = {
                 mocks.emitFocusEvent(f);
                 expect(onFocus).toHaveBeenCalledWith(
                     expect.objectContaining({
-                        field: f, type: 'onFocus', isValid: false,
+                        field: f, type: 'onFocus', isValid: false, isPotentiallyValid: true,
                     }),
                 );
 
                 mocks.emitBlurEvent(f);
                 expect(onBlur).toHaveBeenCalledWith(
                     expect.objectContaining({
-                        field: f, type: 'onBlur', isValid: false,
+                        field: f, type: 'onBlur', isValid: false, isPotentiallyValid: true,
                     }),
                 );
                 onFocus.mockReset();
