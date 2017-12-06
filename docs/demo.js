@@ -22708,6 +22708,7 @@ var BraintreeApi = function (_Api) {
                 field: field.props.type,
                 type: type,
                 event: event,
+                isPotentiallyValid: event.fields[event.emittedBy].isPotentiallyValid,
                 isValid: event.fields[event.emittedBy].isValid
             }, attrs);
             field.emit(sanitizedEvent);
@@ -23095,7 +23096,10 @@ var SquareField = function (_Api$Field) {
     _createClass(SquareField, [{
         key: 'emit',
         value: function emit(ev) {
-            ev.isValid = ev.event.currentState.isCompletelyValid;
+            Object.assign(ev, {
+                isValid: ev.event.currentState.isCompletelyValid,
+                isPotentiallyValid: ev.event.currentState.isPotentiallyValid
+            });
             _get(SquareField.prototype.__proto__ || Object.getPrototypeOf(SquareField.prototype), 'emit', this).call(this, ev);
             if (this.isValid !== ev.event.currentState.isCompletelyValid) {
                 this.isValid = ev.event.currentState.isCompletelyValid;
@@ -23171,7 +23175,8 @@ var SquareApi = function (_Api) {
             if (event.currentState.isCompletelyValid !== event.previousState.isCompletelyValid) {
                 this.onFieldValidity(Object.assign(sanitizedEvent, {
                     type: 'validityChange',
-                    isValid: event.currentState.isCompletelyValid
+                    isValid: event.currentState.isCompletelyValid,
+                    isPotentiallyValid: event.currentState.isPotentiallyValid
                 }));
             }
         }
@@ -23287,10 +23292,9 @@ var StripeField = function (_Api$Field) {
             this.element = elements.create(this.type, this.options);
             this.element.mount(this.selector);
             this.element.addEventListener('change', function (ev) {
-                if (ev.complete !== _this2.isValid) {
-                    _this2.isValid = ev.complete;
+                if (ev.isValid !== _this2.isValid) {
+                    _this2.isValid = !ev.error;
                     if (_this2.events.onValidityChange) {
-                        ev.isValid = ev.complete;
                         _this2.api.onFieldEvent('onValidityChange', _this2, ev);
                     }
                     _this2.api.onFieldValidity(_this2);
@@ -23384,11 +23388,13 @@ var StripeApi = function (_Api) {
         key: 'onFieldEvent',
         value: function onFieldEvent(eventName, field, event) {
             var attrs = EVENT_DECODERS[eventName] ? EVENT_DECODERS[eventName](event) : {};
-
+            // ev.isValid = this.isValid;
+            // ev.isPotentiallyValid = !ev.error;
             var sanitizedEvent = Object.assign({
                 field: field.props.type,
                 type: eventName,
-                isValid: field.isValid,
+                isValid: !!event.isValid,
+                isPotentiallyValid: !event.error,
                 event: event
             }, attrs);
             field.emit(sanitizedEvent);
