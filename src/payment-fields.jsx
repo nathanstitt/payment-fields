@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Vendors from './vendors';
-
 import Field from './field.jsx';
+
+export { Vendors };
 
 export default class PaymentFields extends React.Component {
 
