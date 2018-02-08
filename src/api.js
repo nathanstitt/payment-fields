@@ -22,7 +22,7 @@ class Field {
         this.id = `field-wrapper-${nextFieldId()}`;
         this.type = type;
         for (const key in rest) { // eslint-disable-line
-            if (key.startsWith('on')) {
+            if ('on' === key.substr(0, 2)) {
                 this.events[key] = rest[key];
                 delete rest[key];
             }
