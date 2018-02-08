@@ -6,13 +6,14 @@ export default {
     entry: './src/payment-fields.jsx',
     plugins: [
         babel({
-            babelrc: true,
+            babelrc: false,
             exclude: 'node_modules/**',
             presets: [['es2015', { modules: false }], 'react', 'es2015-rollup'],
             plugins: [
                 'transform-decorators-legacy',
                 'transform-class-properties',
                 'transform-object-rest-spread',
+                'external-helpers',
             ],
         }),
     ],
@@ -27,7 +28,7 @@ export default {
         {
             dest: pkg.main,
             format: 'umd',
-            moduleName: 'payment-fields',
+            name: 'payment-fields',
             sourceMap: true,
         }, {
             dest: pkg.module,

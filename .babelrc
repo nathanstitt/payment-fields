@@ -17,6 +17,7 @@
         "transform-decorators-legacy",
         "transform-class-properties",
         "transform-object-rest-spread",
-        "transform-runtime"
+        "transform-runtime",
+        "external-helpers"
     ]
 }
