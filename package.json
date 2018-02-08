@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "loadjs": "^3.5.2"
   }
 }
