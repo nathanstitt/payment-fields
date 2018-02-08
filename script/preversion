@@ -13,6 +13,8 @@ script/test
 
 $(npm bin)/rollup -c
 
+$(npm bin)/babel ./src/ --out-dir ./dist
+
 $(npm bin)/webpack
 
 if [ -n "$(git status --porcelain)" ]; then
