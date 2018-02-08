@@ -113,9 +113,12 @@ export default class BraintreeApi extends Api {
         field.emit(sanitizedEvent);
 
         if ('validityChange' === eventName) {
-            const isValid = !Object.keys(event.fields).find(
-                f => false === event.fields[f].isValid,
-            );
+            let isValid = true;
+            const fields = Object.keys(event.fields);
+            for (let fi = 0; fi < fields.length; fi++) {
+                isValid = Boolean(event.fields[fields[fi]].isValid);
+                if (!isValid) { break; }
+            }
             this.onFieldValidity(Object.assign(sanitizedEvent, { isValid }));
         } else {
             super.onFieldEvent(sanitizedEvent);
