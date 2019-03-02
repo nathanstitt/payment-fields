@@ -92,8 +92,7 @@ export default class BraintreeApi extends Api {
                 'blur', 'focus', 'empty', 'notEmpty',
                 'cardTypeChange', 'validityChange',
             ].forEach((eventName) => {
-                hostedFields.on(eventName, ev =>
-                    this.onFieldEvent(eventName, ev));
+                hostedFields.on(eventName, ev => this.onFieldEvent(eventName, ev));
             });
             this.onFieldsReady();
         });

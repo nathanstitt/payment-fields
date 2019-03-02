@@ -18,7 +18,9 @@ export default class SquareMocks extends VendorMock {
                 this.options = options;
                 this.options.callbacks.paymentFormLoaded();
             }
+
             build = jest.fn(() => { mock.mock = this; })
+
             requestCardNonce = jest.fn(() => {
                 this.options.callbacks.cardNonceResponseReceived(null, 'square-12345', {});
             });

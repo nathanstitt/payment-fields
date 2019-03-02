@@ -14,7 +14,9 @@ export default class StripeMocks extends VendorMock {
         class ElementMock {
 
             constructor(options) { this.options = options; }
+
             listeners = {}
+
             mount = jest.fn()
 
             addEventListener = jest.fn((eventName, cb) => {

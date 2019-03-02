@@ -79,6 +79,7 @@ class StripeField extends Api.Field {
 export default class StripeApi extends Api {
 
     FieldClass = StripeField;
+
     cardType = '';
 
     constructor(props) {
