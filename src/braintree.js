@@ -45,8 +45,8 @@ export default class BraintreeApi extends Api {
             props,
             isReady: !!global.braintree,
             urls: [
-                'https://js.braintreegateway.com/web/3.22.2/js/client.js',
-                'https://js.braintreegateway.com/web/3.22.2/js/hosted-fields.js',
+                'https://js.braintreegateway.com/web/3.43.0/js/client.min.js',
+                'https://js.braintreegateway.com/web/3.43.0/js/hosted-fields.min.js',
             ],
         });
     }
