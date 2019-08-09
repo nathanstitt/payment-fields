@@ -1,5 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
+import PaymentFieldsContext from './context';
 
 export default class Field extends React.Component {
 
@@ -18,20 +19,19 @@ export default class Field extends React.Component {
         placeholder: '',
     }
 
-    static contextTypes = {
-        paymentFieldsApi: PropTypes.object,
+    static contextType = PaymentFieldsContext;
+
+    constructor(props, context) {
+        super(props, context);
+        this.fieldId = context.checkInField(this.props);
     }
 
     focus() {
-        this.context.paymentFieldsApi.focusField(this.props.type);
+        this.context.focusField(this.props.type);
     }
 
     clear() {
-        this.context.paymentFieldsApi.clearField(this.props.type);
-    }
-
-    componentWillMount() {
-        this.fieldId = this.context.paymentFieldsApi.checkInField(this.props);
+        this.context.clearField(this.props.type);
     }
 
     get className() {

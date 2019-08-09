@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Vendors from './vendors';
 import Field from './field.jsx';
+import PaymentFieldsContext from './context';
 
 export default class PaymentFields extends React.Component {
 
@@ -26,10 +27,6 @@ export default class PaymentFields extends React.Component {
         styles: {},
     }
 
-    static childContextTypes = {
-        paymentFieldsApi: PropTypes.object,
-    }
-
     constructor(props) {
         super(props);
         const Api = Vendors[props.vendor];
@@ -37,23 +34,23 @@ export default class PaymentFields extends React.Component {
     }
 
     componentDidMount() {
-        this.api.setAuthorization(this.props.authorization);
+        if (this.props.authorization) {
+            this.api.setAuthorization(this.props.authorization);
+        }
     }
 
     componentWillUnmount() {
         this.api.teardown();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.api.setAuthorization(nextProps.authorization);
+    componentDidUpdate(prevProps) {
+        if (prevProps.authorization !== this.props.authorization) {
+            this.api.setAuthorization(this.props.authorization);
+        }
     }
 
     tokenize(options) {
         return this.api.tokenize(options);
-    }
-
-    getChildContext() {
-        return { paymentFieldsApi: this.api };
     }
 
     render() {
@@ -61,9 +58,11 @@ export default class PaymentFields extends React.Component {
         let className = 'payment-fields-wrapper';
         if (providedClass) { className += ` ${providedClass}`; }
         return (
-            <Tag className={className}>
-                {this.props.children}
-            </Tag>
+            <PaymentFieldsContext.Provider value={this.api}>
+                <Tag className={className}>
+                    {this.props.children}
+                </Tag>
+            </PaymentFieldsContext.Provider>
         );
     }
 
