@@ -2,7 +2,7 @@ const config = {
     presets: [
         [
             '@babel/preset-env', {
-                useBuiltIns: 'usage',
+                useBuiltIns: 'entry',
                 corejs: 2,
                 targets: '> 1% in US',
             },
@@ -17,9 +17,5 @@ const config = {
         '@babel/plugin-syntax-dynamic-import',
     ],
 };
-
-// if (process.env.NODE_ENV !== 'production') {
-//     config.plugins.push('transform-dynamic-import');
-// }
 
 module.exports = config;
